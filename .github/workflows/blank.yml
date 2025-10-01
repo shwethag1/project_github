@@ -22,6 +22,11 @@ jobs:
         run: python --version
       - name: docker version
         run: docker -v
-      - name: terrafrom version
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.6   # or the version you need
+      - name: Verify Terraform version
         run: terraform -version
+     
 
