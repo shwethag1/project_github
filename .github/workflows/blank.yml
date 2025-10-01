@@ -1,28 +1,27 @@
-name: My First GitHub Actions
-
-on: [push]
-
+name: CI
+'on':
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        python-version: [3.8, 3.9]
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: 'echo Hello, world!'
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project
+      - name: java version
+        run: java -version
+      - name: maven version
+        run: mvn --version
+      - name: python version
+        run: python --version
+      - name: docker version
+        run: docker -v
+      - name: terrafrom version
+        run: terraform --version
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest
-
-    - name: Run tests
-      run: |
-        cd src
-        python -m pytest addition.py
